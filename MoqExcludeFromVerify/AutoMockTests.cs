@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Moq;
 using Moq.AutoMock;
 
 namespace MoqExcludeFromVerify;
@@ -10,7 +11,9 @@ public class AutoMockTests
     public void Setup()
     {
         mocker = new AutoMocker();
-        mocker.Setup<IDependency, string>(x => x.Method2()).Returns("method 2");
+        mocker.Setup<IDependency, string>(x => x.Method2())
+            .Returns("method 2")
+            .Verifiable(Times.AtMost(int.MaxValue));
     }
 
     [Test]

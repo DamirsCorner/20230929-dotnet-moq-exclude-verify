@@ -11,7 +11,9 @@ public class MoqTests
     public void Setup()
     {
         mockDependency = new Mock<IDependency>();
-        mockDependency.Setup(x => x.Method2()).Returns("method 2");
+        mockDependency.Setup(x => x.Method2())
+            .Returns("method 2")
+            .Verifiable(Times.AtMost(int.MaxValue));
     }
 
     [Test]
